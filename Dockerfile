@@ -63,6 +63,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /build/build/ra-spoof /usr/local/bin/ra-spoof
+COPY --from=builder /build/srsRAN_4G/build/lib/src/phy/rf/*.so* /usr/local/lib/
+RUN ldconfig
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
